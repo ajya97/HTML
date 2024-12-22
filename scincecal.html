@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.calculator {
+    width: 300px;
+    margin: 50px auto;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.display {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 24px;
+    text-align: right;
+    border: 1px solid #ccc;
+}
+
+.history {
+    margin-bottom: 20px;
+}
+
+#history {
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}
+
+button {
+    padding: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.clear {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.operator {
+    background-color: #03a9f4;
+    color: #fff;
+}
+
+.number {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.equals {
+    background-color: #8BC34A;
+    color: #fff;
+    grid-column: 3 / 5;
+}
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display">
+            <input type="text" id="display" class="text">
+        </div>
+        <div class="history">
+            <h3>Calculation History:</h3>
+            <div id="history"></div>
+        </div>
+        <div class="buttons">
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button class="clear" onclick="clearHistory()">AC</button>
+            <button class="operator" onclick="updateDisplay('%')">%</button>
+            <button class="operator" onclick="updateDisplay('/')">/</button>
+            <button class="number" onclick="updateDisplay(7)">7</button>
+            <button class="number" onclick="updateDisplay(8)">8</button>
+            <button class="number" onclick="updateDisplay(9)">9</button>
+            <button class="operator" onclick="updateDisplay('*')">*</button>
+            <button class="number" onclick="updateDisplay(4)">4</button>
+            <button class="number" onclick="updateDisplay(5)">5</button>
+            <button class="number" onclick="updateDisplay(6)">6</button>
+            <button class="operator" onclick="updateDisplay('-')">-</button>
+            <button class="number" onclick="updateDisplay(1)">1</button>
+            <button class="number" onclick="updateDisplay(2)">2</button>
+            <button class="number" onclick="updateDisplay(3)">3</button>
+            <button class="operator" onclick="updateDisplay('+')">+</button>
+            <button class="number" onclick="updateDisplay(0)">0</button>
+            <button class="number" onclick="updateDisplay('.')">.</button>
+            <button class="equals" onclick="calculate()">=</button>
+            <button class="operator" onclick="updateDisplay('sin')">sin</button>
+            <button class="operator" onclick="updateDisplay('cos')">cos</button>
+            <button class="operator" onclick="updateDisplay('tan')">tan</button>
+            <button class="operator" onclick="updateDisplay('sqrt')">√</button>
+            <button class="operator" onclick="updateDisplay('log')">log</button>
+            <button class="operator" onclick="updateDisplay('exp')">exp</button>
+        </div>
+    </div>
+    <script>
+        
+let display = document.getElementById('display');
+let historyDiv = document.getElementById('history');
+let calculation = '';
+let result = 0;
+
+function updateDisplay(value) {
+    calculation += value;
+    display.value = calculation;
+}
+
+function clearDisplay() {
+    calculation = '';
+    display.value = '';
+}
+
+function clearHistory() {
+    historyDiv.innerHTML = '';
+}
+
+function calculate() {
+    try {
+        result = eval(calculation);
+        display.value = result;
+        historyDiv.innerHTML += calculation + ' = ' + result + '<br>';
+        calculation = '';
+    } catch (error) {
+        display.value = 'Error';
+        calculation = '';
+    }
+}
+
+function sin() {
+    calculation = Math.sin(calculation);
+    display.value = calculation;
+}
+
+function cos() {
+    calculation = Math.cos(calculation);
+    display.value = calculation;
+}
+
+function tan() {
+    calculation = Math.tan(calculation);
+    display.value = calculation;
+}
+
+function sqrt() {
+    calculation = Math.sqrt(calculation);
+    display.value = calculation;
+}
+
+function log() {
+    calculation = Math.log(calculation);
+    display.value = calculation;
+}
+
+function exp() {
+    calculation = Math.exp(calculation);
+    display.value = calculation;
+}
+    </script>
+</body>
+</html>
